@@ -70,8 +70,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="/pemeriksaan"><span class="fa-stack fa-lg pull-left"><i
-                                class="fa fa-cloud-download fa-stack-1x "></i></span>Pemeriksaan</a>
+                    <a href="/pendaftaran"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-cloud-download fa-stack-1x "></i></span>Pendaftaran</a>
                 </li>
                 <li>
                     <a href=""><span class="fa-stack fa-lg pull-left"><i

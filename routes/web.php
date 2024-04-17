@@ -22,6 +22,7 @@ Route::get('/getdokter', [App\Http\Controllers\dokterController::class, 'getdokt
 
 
 Route::resource('/masterdata/hewan', \App\Http\Controllers\hewanController::class);
+Route::resource('/pendaftaran', \App\Http\Controllers\pendaftaranController::class);
 
 
 Auth::routes();
