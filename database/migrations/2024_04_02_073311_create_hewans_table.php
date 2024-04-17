@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('hewans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('jenis');
+            $table->string('nama_hewan');
+            $table->string('jenis_kelamin');
+            $table->string('jenis_hewan');
             $table->integer('umur');
-            $table->string('pemilik');
-            $table->string('alamat_pemilik');
-            $table->string('no_telp_pemilik');
-            $table->date('tgl_pendaftaran');
+            $table->string('nama_pemilik');
+            $table->string('alamat');
+            $table->string('no_telp');
             // tambahkan kolom lain yang diperlukan
             $table->timestamps();
         });

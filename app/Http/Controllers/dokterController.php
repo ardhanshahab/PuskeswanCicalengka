@@ -4,35 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\dokter;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Http\Resources\PostResource;
 
 class dokterController extends Controller
 {
     public function index()
     {
-        $dokters = Dokter::all();
-        return view('dokters.index', ['dokters' => $dokters]);
+
+        return view('dokters.index');
     }
 
     public function create()
     {
-        return view('dokters.create');
+        $users = User::where('role', 'dokter')
+             ->where('status_dokter', '0')
+             ->get();
+
+        // return view('dokter.create', ['users' => $users]);
+        return view('dokters.create', compact('users'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'spesialisasi' => 'required',
+            'user_id' => 'required|exists:users,id',
             'alamat' => 'required',
             'no_telepon' => 'required',
         ]);
 
-        Dokter::create($request->all());
+        $status = '0';
 
-        return redirect()->route('dokters.index')
-            ->with('success', 'Dokter berhasil ditambahkan');
+        Dokter::create([
+            'user_id' => $request->user_id,
+            'alamat' => $request->alamat,
+            'no_telepon' => $request->no_telepon,
+            'status_kerja' => $status
+        ]);
+
+        // Update status_dokter pada tabel users
+        User::where('id', $request->user_id)->update(['status_dokter' => $status]);
+
+        return redirect()->route('dokter.index')->with('success','Data berhasil disimpan');
+            // ->with('success', 'Dokter berhasil ditambahkan');
     }
+
 
     public function edit($id)
     {
@@ -63,4 +79,12 @@ class dokterController extends Controller
         return redirect()->route('dokters.index')
             ->with('success', 'Dokter berhasil dihapus');
     }
+
+    public function getDokter()
+    {
+        $dokters = Dokter::with('user')->get();
+        return new PostResource(true, 'List Data Posts', $dokters);
+    }
+
 }
+

@@ -1,3 +1,17 @@
+/* CSS untuk navbar */
+.navbar {
+    background-color: #135D66; /* Warna latar belakang */
+    margin-bottom: 0;
+    border-radius: 0;
+    text-decoration: none;
+}
+
+/* CSS untuk tombol toggle navbar di mode desktop */
+@media (min-width: 768px) {
+    #menu-toggle {
+        display: none; /* Sembunyikan tombol toggle pada mode desktop */
+    }
+}
 
 
 .nav-pills > li > a {
@@ -26,7 +40,7 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #003C43;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -83,7 +97,7 @@
     text-decoration: none;
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
-    border-left: red 2px solid;
+    border-left: #77B0AA solid;
  }
 
  .sidebar-nav li a:active,

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->string('nama');
             $table->string('alamat');
             $table->string('no_telepon');
+            $table->enum('status_kerja', ['0', '1']);
             $table->timestamps();
         });
     }

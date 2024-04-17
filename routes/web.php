@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginRegisterController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +14,16 @@ use App\Http\Controllers\LoginRegisterController;
 |
 */
 
+Route::redirect('/', '/login');
 
-Route::controller(LoginRegisterController::class)->group(function() {
-    Route::get('/register', 'register')->name('register');
-    Route::post('/store', 'store')->name('store');
-    Route::get('/login', 'login')->name('login');
-    Route::post('/authenticate', 'authenticate')->name('authenticate');
-    Route::get('/dashboard', 'dashboard')->name('dashboard');
-    Route::post('/logout', 'logout')->name('logout');
-});
+Route::resource('/masterdata/dokter', \App\Http\Controllers\dokterController::class);
+
+Route::get('/getdokter', [App\Http\Controllers\dokterController::class, 'getdokter'])->name('getdokter');
+
+
+Route::resource('/masterdata/hewan', \App\Http\Controllers\hewanController::class);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

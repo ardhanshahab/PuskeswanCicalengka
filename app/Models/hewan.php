@@ -9,13 +9,13 @@ class hewan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nama',
-        'jenis',
+        'nama_hewan',
+        'jenis_kelamin',
+        'jenis_hewan',
         'umur',
-        'pemilik',
-        'alamat_pemilik',
-        'no_telp_pemilik',
-        'tgl_pendaftaran',
+        'nama_pemilik',
+        'alamat',
+        'no_telp',
         // tambahkan atribut lain yang diperlukan
     ];
 }

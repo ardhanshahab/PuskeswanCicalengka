@@ -19,14 +19,25 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default no-margin navbar-light bg-light">
+    <nav class="navbar navbar-default no-margin navbar-dark">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header fixed-brand d-flex">
             <button type="button" class="btn navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
                 <i class="fa-bars fa"></i>
             </button>
-            <a class="navbar-brand" href="#">Puskeswan Cicalengka</a>
+            <a class="navbar-brand mx-4" href="#">Puskeswan Cicalengka</a>
         </div>
+        <ul class="nav navbar-nav ml-auto"> <!-- ml-auto untuk membuat tombol logout ke kanan -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
+        </ul>
         <!-- navbar-header-->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -39,36 +50,37 @@
         </div>
         <!-- bs-example-navbar-collapse-1 -->
     </nav>
+
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+            <ul class="sidebar-nav nav-pills" id="menu">
                 <li class="active">
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i
-                                class="fa fa-cloud-download fa-stack-1x "></i></span>Dashboard</a>
+                    <a href="/home"><span class="fa-stack fa-lg pull-left">
+                        <i class="fa fa-cloud-download fa-stack-1x "></i></span>Dashboard</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i
                                 class="fa fa-flag fa-stack-1x "></i></span>Master Data</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i
+                        <li><a href="/masterdata/hewan"><span class="fa-stack fa-lg pull-left"><i
                                         class="fa fa-flag fa-stack-1x "></i></span>Data Hewan</a></li>
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i
+                        <li><a href="/masterdata/dokter"><span class="fa-stack fa-lg pull-left"><i
                                         class="fa fa-flag fa-stack-1x "></i></span>Data Dokter</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i
+                    <a href="/pemeriksaan"><span class="fa-stack fa-lg pull-left"><i
                                 class="fa fa-cloud-download fa-stack-1x "></i></span>Pemeriksaan</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i
+                    <a href=""><span class="fa-stack fa-lg pull-left"><i
                                 class="fa fa-flag fa-stack-1x "></i></span>Laporan</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i
-                                        class="fa fa-flag fa-stack-1x "></i></span>Data Hewan</a></li>
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i
-                                        class="fa fa-flag fa-stack-1x "></i></span>Data Dokter</a></li>
+                        <li><a href="/pemeriksaan/hariini"><span class="fa-stack fa-lg pull-left"><i
+                                        class="fa fa-flag fa-stack-1x "></i></span>Pemeriksaan Hari ini</a></li>
+                        <li><a href="/pemeriksaan/histori"><span class="fa-stack fa-lg pull-left"><i
+                                        class="fa fa-flag fa-stack-1x "></i></span>Histori Pemeriksaan</a></li>
                     </ul>
                 </li>
                 <li>
@@ -90,13 +102,6 @@
         </div>
         <!-- /#page-content-wrapper -->
     </div>
-
-
-
-
-
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js"></script>

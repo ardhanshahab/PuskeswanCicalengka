@@ -10,54 +10,63 @@ class hewanController extends Controller
     public function index()
     {
         $hewans = Hewan::all();
-        return view('hewans.index', ['hewans' => $hewans]);
+        return view('hewan.index', ['hewans' => $hewans]);
     }
 
     public function create()
     {
-        return view('hewans.create');
+        return view('hewan.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'jenis' => 'required',
+            'nama_hewan' => 'required',
+            'jenis_kelamin' => 'required',
+            'jenis_hewan' => 'required',
             'umur' => 'required',
-            'pemilik' => 'required',
-            'alamat_pemilik' => 'required',
-            'no_telp_pemilik' => 'required',
-            'tgl_pendaftaran' => 'required',
+            'nama_pemilik' => 'required',
+            'alamat' => 'required',
+            'no_telp' => 'required',
+        ]);
+        // dd($request->validate());
+        Hewan::create([
+            'nama_hewan' => $request->nama_hewan,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'jenis_hewan' => $request->jenis_hewan,
+            'umur' => $request->umur,
+            'nama_pemilik' => $request->nama_pemilik,
+            'alamat' => $request->alamat,
+            'no_telp' => $request->no_telp,
+
         ]);
 
-        Hewan::create($request->all());
-
-        return redirect()->route('hewans.index')
+        return redirect()->route('hewan.index')
             ->with('success', 'Hewan berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $hewan = Hewan::find($id);
-        return view('hewans.edit', compact('hewan'));
+        return view('hewan.edit', compact('hewan'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'jenis' => 'required',
+            'nama_hewan' => 'required',
+            'jenis_kelamin' => 'required',
+            'jenis_hewan' => 'required',
             'umur' => 'required',
-            'pemilik' => 'required',
-            'alamat_pemilik' => 'required',
-            'no_telp_pemilik' => 'required',
-            'tgl_pendaftaran' => 'required',
+            'nama_pemilik' => 'required',
+            'alamat' => 'required',
+            'no_telp' => 'required',
         ]);
 
         $hewan = Hewan::find($id);
         $hewan->update($request->all());
 
-        return redirect()->route('hewans.index')
+        return redirect()->route('hewan.index')
             ->with('success', 'Hewan berhasil diperbarui');
     }
 
@@ -65,7 +74,7 @@ class hewanController extends Controller
     {
         Hewan::find($id)->delete();
 
-        return redirect()->route('hewans.index')
+        return redirect()->route('hewan.index')
             ->with('success', 'Hewan berhasil dihapus');
     }
 }
