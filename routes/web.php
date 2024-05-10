@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,17 +13,19 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::redirect('/', '/login');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::resource('/masterdata/dokter', \App\Http\Controllers\dokterController::class);
-
-Route::get('/getdokter', [App\Http\Controllers\dokterController::class, 'getdokter'])->name('getdokter');
-
-
-Route::resource('/masterdata/hewan', \App\Http\Controllers\hewanController::class);
-Route::resource('/pendaftaran', \App\Http\Controllers\pendaftaranController::class);
-
+// Route::get('/cashier',[App\Http\Controllers\orderController::class,'cashier']);
+Route::get('/getDokter',[App\Http\Controllers\dokterController::class,'getDokter'])->name('getDokter');
+Route::put('masters/dokter/{dokter}', [App\Http\Controllers\dokterController::class,'update'])->name('dokters.update');
+Route::get('/getPasien',[App\Http\Controllers\pasienController::class,'getPasien'])->name('getPasien');
+Route::put('masters/pasien/{pasien}', [App\Http\Controllers\pasienController::class,'update'])->name('pasiens.update');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('/master/dokter', \App\Http\Controllers\dokterController::class);
+Route::resource('/master/pasien', \App\Http\Controllers\pasienController::class);

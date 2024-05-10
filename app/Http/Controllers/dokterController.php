@@ -4,87 +4,138 @@ namespace App\Http\Controllers;
 
 use App\Models\dokter;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Http\Resources\PostResource;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class dokterController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-
-        return view('dokters.index');
-    }
-
-    public function create()
-    {
-        $users = User::where('role', 'dokter')
-             ->where('status_dokter', '0')
-             ->get();
-
-        // return view('dokter.create', ['users' => $users]);
-        return view('dokters.create', compact('users'));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'alamat' => 'required',
-            'no_telepon' => 'required',
-        ]);
-
-        $status = '0';
-
-        Dokter::create([
-            'user_id' => $request->user_id,
-            'alamat' => $request->alamat,
-            'no_telepon' => $request->no_telepon,
-            'status_kerja' => $status
-        ]);
-
-        // Update status_dokter pada tabel users
-        User::where('id', $request->user_id)->update(['status_dokter' => $status]);
-
-        return redirect()->route('dokter.index')->with('success','Data berhasil disimpan');
-            // ->with('success', 'Dokter berhasil ditambahkan');
-    }
-
-
-    public function edit($id)
-    {
-        $dokter = Dokter::find($id);
-        return view('dokters.edit', compact('dokter'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'spesialisasi' => 'required',
-            'alamat' => 'required',
-            'no_telepon' => 'required',
-        ]);
-
-        $dokter = Dokter::find($id);
-        $dokter->update($request->all());
-
-        return redirect()->route('dokters.index')
-            ->with('success', 'Dokter berhasil diperbarui');
-    }
-
-    public function destroy($id)
-    {
-        Dokter::find($id)->delete();
-
-        return redirect()->route('dokters.index')
-            ->with('success', 'Dokter berhasil dihapus');
+        return view('dokter.index');
     }
 
     public function getDokter()
     {
-        $dokters = Dokter::with('user')->get();
-        return new PostResource(true, 'List Data Posts', $dokters);
+         $posts = dokter::get();
+
+         return response()->json([
+            'success' => true,
+            'message' => 'List dokter',
+            'data' => $posts,
+        ]);
     }
 
-}
+    public function create(): View
+    {
+        return view('dokter.create');
+    }
 
+    /**
+     * store
+     *
+     * @param  mixed $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
+    {
+        $this->validate($request, [
+            'nama_dokter'     => 'required|min:1',
+            'nip'     => 'required|min:1',
+            'jenis_kelamin'     => 'required|min:1',
+            'alamat'     => 'required|min:1',
+        ]);
+
+        dokter::create([
+            'nama_dokter'     => $request->nama_dokter,
+            'nip'     => $request->nip,
+            'jenis_kelamin'     => $request->jenis_kelamin,
+            'alamat'     => $request->alamat,
+        ]);
+
+        return redirect()->route('dokter.index')->with(['success' => 'Data Berhasil Disimpan!']);
+    }
+
+    /**
+     * show
+     *
+     * @param  mixed $id
+     * @return View
+     */
+    public function show(string $id): View
+    {
+        //get post by ID
+        $post = dokter::findOrFail($id);
+
+        //render view with post
+        return view('dokter.show', compact('post'));
+    }
+
+    /**
+     * edit
+     *
+     * @param  mixed $id
+     * @return View
+     */
+    public function edit(string $id): View
+    {
+        //get post by ID
+        $post = dokter::findOrFail($id);
+
+        //render view with post
+        return view('dokter.edit', compact('post'));
+    }
+
+    /**
+     * update
+     *
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'nama_dokter'     => 'required|min:1',
+            'nip'     => 'required|min:1',
+            'jenis_kelamin'     => 'required|min:1',
+            'alamat'     => 'required|min:1',
+        ]);
+
+        $post = dokter::findOrFail($id);
+
+            $post->update([
+                'nama_dokter'     => $request->nama_dokter,
+                'nip'     => $request->nip,
+                'jenis_kelamin'     => $request->jenis_kelamin,
+                'alamat'     => $request->alamat,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Berhasil diupdate',
+                'data' => $post,
+            ]);
+    }
+
+    /**
+     * destroy
+     *
+     * @param  mixed $post
+     * @return void
+     */
+    public function destroy($id): RedirectResponse
+    {
+        //get post by ID
+        $post = dokter::findOrFail($id);
+
+        //delete post
+        $post->delete();
+
+        //redirect to index
+        return redirect()->route('dokter.index')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+}
