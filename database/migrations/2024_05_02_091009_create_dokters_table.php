@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nip');
             $table->string('jenis_kelamin');
             $table->string('alamat');
+            $table->enum('status_kerja', ['aktif', 'tidak aktif']);
             $table->timestamps();
         });
     }
@@ -29,3 +30,4 @@ return new class extends Migration
         Schema::dropIfExists('dokters');
     }
 };
+

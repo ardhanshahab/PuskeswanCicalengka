@@ -13,6 +13,17 @@ class hewanController extends Controller
         return view('hewan.index', ['hewans' => $hewans]);
     }
 
+    public function getPasien()
+    {
+         $posts = hewan::get();
+
+         return response()->json([
+            'success' => true,
+            'message' => 'List pasien',
+            'data' => $posts,
+        ]);
+    }
+
     public function create()
     {
         return view('hewan.create');

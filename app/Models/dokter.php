@@ -13,5 +13,13 @@ class dokter extends Model
         'nip',
         'jenis_kelamin',
         'alamat',
+        'status_kerja'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(user::class, 'nama_dokter', 'name');
+    }
+
+
 }

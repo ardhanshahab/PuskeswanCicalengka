@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\antrian;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $antrians = Antrian::orderBy('nomor_antrian')->get();
+        // return view('antrian.index', compact('antrians'));
+
+        return view('home', compact('antrians'));
     }
 }

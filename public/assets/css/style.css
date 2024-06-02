@@ -10872,7 +10872,7 @@ textarea.form-control-lg {
   z-index: -1;
 }
 .hero-banner .left-hero-color {
-  padding-top: 250px;
+  padding-top: 100px;
   z-index: 1;
 }
 .hero-banner .left-hero-color::before {
@@ -10904,7 +10904,7 @@ textarea.form-control-lg {
   transform: rotate(90deg);
 }
 .hero-banner .right-hero-color {
-  padding-top: 250px;
+  padding-top: 10px;
   z-index: 1;
 }
 .hero-banner .right-hero-color::after {
@@ -11358,7 +11358,7 @@ textarea.form-control-lg {
 }
 
 .footer {
-  padding: 170px 0 100px;
+  padding: 70px 0 ;
   background-color: #001C68;
 }
 .footer .footer-logo-col {

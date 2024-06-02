@@ -48,8 +48,8 @@ class pendaftaranController extends Controller
                 'nama_hewan' => $request->nama_hewan,
                 'nama_pemilik' => $request->nama_pemilik,
                 'riwayat_penyakit' => $request->riwayat_penyakit,
-                'tindakan' => $request->tindakan,
-                'status' => $request->status,
+                'tindakan' => 'Pemeriksaan',
+                'status' => 'Proses Pemeriksaan',
             ]);
         } else {
             // Jika data belum ada, tambahkan ke tabel hewan dan pendaftaran

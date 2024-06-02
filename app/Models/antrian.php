@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pendaftaran extends Model
+class antrian extends Model
 {
     use HasFactory;
     protected $fillable = [
         'nama_hewan',
-        'nama_pemilik',
-        'nama_dokter',
-        'riwayat_penyakit',
-        'tindakan',
-        'status',
-        'tanggal_pemeriksaan',
+        'waktu_datang',
+        'nomor_antrian',
+        'waktu_periksa',
+        'waktu_selesai',
+        'pendaftaran_id',
     ];
 
     public function hewan()
@@ -23,8 +22,9 @@ class Pendaftaran extends Model
         return $this->belongsTo(hewan::class, 'nama_hewan', 'nama_hewan');
     }
 
-    public function dokter()
+    public function pendaftaran()
     {
-        return $this->belongsTo(dokter::class, 'nama_dokter', 'nama_dokter');
+        return $this->belongsTo(pendaftaran::class, 'pendaftaran_id', 'id');
     }
+
 }

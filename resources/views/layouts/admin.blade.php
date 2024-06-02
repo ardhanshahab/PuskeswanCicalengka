@@ -286,12 +286,12 @@
                 </div>
                 <ul class="nav-links">
                   <li>
-                    <a href="#">
+                    <a href="/home">
                       <i class='bx bx-grid-alt' ></i>
                       <span class="link_name">Dashboard</span>
                     </a>
                     <ul class="sub-menu blank">
-                      <li><a class="link_name" href="#">Dashboard</a></li>
+                      <li><a class="link_name" href="/home">Dashboard</a></li>
                     </ul>
                   </li>
                   <li>
@@ -320,9 +320,24 @@
                     </div>
                     <ul class="sub-menu">
                       <li><a class="link_name" href="#">Laporan</a></li>
-                      <li><a href="#">Transaksi</a></li>
-                      {{-- <li><a href="#">Login Form</a></li>
-                      <li><a href="#">Card Design</a></li> --}}
+                      <li><a href="#">Histori Pasien</a></li>
+                      <li><a href="#">Pembayaran</a></li>
+                      {{-- <li><a href="#">Card Design</a></li> --}}
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="iocn-link">
+                      <a href="#">
+                        <i class='bx bx-book-alt' ></i>
+                        <span class="link_name">Setting</span>
+                      </a>
+                      <i class='bx bxs-chevron-down arrow' ></i>
+                    </div>
+                    <ul class="sub-menu">
+                      <li><a class="link_name" href="#">Setting</a></li>
+                      <li><a href="#">Landing Page</a></li>
+                      {{-- <li><a href="#">Pembayaran</a></li> --}}
+                      {{-- <li><a href="#">Card Design</a></li> --}}
                     </ul>
                   </li>
 
