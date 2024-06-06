@@ -3,10 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
-                <a href="{{ route('antrian.create') }}" class="btn btn-primary">Tambah Antrian</a>
-                    <table class="table">
+                <div class="card-body">
+                    <div class="d-flex justify-content-end my-2">
+                        <a href="{{ route('antrian.create') }}" class="btn btn-primary">Tambah Antrian</a>
+                    </div>
+                    <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -47,6 +50,8 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                </div>
             </div>
         </div>
     </div>

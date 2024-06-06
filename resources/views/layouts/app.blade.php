@@ -22,7 +22,7 @@
         @stack('css')
     </head>
     <body>
-        <div class="container-fluid mt-2">
+        <div class="container-fluid" style=" background-color: #E4E9F7">
             @yield('content')
         </div>
 

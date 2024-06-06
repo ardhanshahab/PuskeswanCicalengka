@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sasscandy</title>
+    <title>Puskeswan Cicalengka</title>
     <link rel="stylesheet" href="{{ asset('assets//libs/OwlCarousel-2/dist/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/iconfont/tabler-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -18,7 +18,7 @@
             <nav class="navbar navbar-expand-xl py-0">
                 <div class="d-flex w-100 justify-content-between align-items-center">
                     <div class="logo">
-                        <a class="navbar-brand py-0 me-0" href="#"><img src="../assets/images/sasscandy-logo.svg" alt=""></a>
+                        <a class="navbar-brand py-0 me-0" href="#">Puskeswan Cicalengka</a>
                     </div>
                     {{-- <a class="d-inline-block d-lg-block d-xl-none d-xxl-none nav-toggler text-decoration-none" data-bs-toggle="offcanvas" href="#offcanvasExample" aria-controls="offcanvasExample">
                         <i class="ti ti-menu-2 text-warning"></i>
@@ -46,11 +46,14 @@
                         <h4 class="mb-0 fw-bold">
                             Jadwal Puskeswan Cicalengka
                         </h4>
-                        <p class="m-0 p-4">Senin 08.00 - 12.00</p>
-                        <p class="m-0 p-4">Selasa 08.00 - 12.00</p>
-                        <p class="m-0 p-4">Rabu 08.00 - 12.00</p>
-                        <p class="m-0 p-4">Kamis 08.00 - 12.00</p>
-                        <p class="m-0 p-4">Jumat 08.00 - 12.00</p>
+                        @foreach($schedules as $schedule)
+                        @if($schedule->is_holiday)
+                            <p class="m-0 p-4">{{ $schedule->day }} - Libur</p>
+                        @else
+                            <p class="m-0 p-4">{{ $schedule->day }} {{ $schedule->start_time }} - {{ $schedule->end_time }}</p>
+                        @endif
+                        {{-- <a href="{{ route('schedules.edit', $schedule->id) }}">Edit</a> --}}
+                        @endforeach
                         <a href="/antrian/create" class="btn btn-warning btn-hover-secondery"><span class="d-inline-block me-2"><i class="ti ti-playstation-triangle"></i></span> Daftar Pemeriksaan</a>
                     </div>
                 </div>

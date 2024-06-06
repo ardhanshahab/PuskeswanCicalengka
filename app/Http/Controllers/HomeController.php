@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\antrian;
+use App\Models\Schedule;
+
 class HomeController extends Controller
 {
     /**
@@ -27,5 +29,12 @@ class HomeController extends Controller
         // return view('antrian.index', compact('antrians'));
 
         return view('home', compact('antrians'));
+    }
+    public function welcome()
+    {
+        $schedules = Schedule::all();
+        // return view('antrian.index', compact('antrians'));
+
+        return view('welcome', compact('schedules'));
     }
 }

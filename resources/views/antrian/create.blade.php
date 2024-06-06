@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card" style="margin-top: 50px">
                     <div class="card-header">Pendaftaran Pasien</div>
 
                     <div class="card-body">

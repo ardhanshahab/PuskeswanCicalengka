@@ -335,7 +335,7 @@
                     </div>
                     <ul class="sub-menu">
                       <li><a class="link_name" href="#">Setting</a></li>
-                      <li><a href="#">Landing Page</a></li>
+                      <li><a href="/schedules">Landing Page</a></li>
                       {{-- <li><a href="#">Pembayaran</a></li> --}}
                       {{-- <li><a href="#">Card Design</a></li> --}}
                     </ul>
