@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Edit Jadwal Dokter') }}</div>
+                <div class="card-header">{{ __('Edit Jadwal Puskeswan') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('schedules.update', $schedule->id) }}">
@@ -39,6 +39,17 @@
                             <input id="end_time" type="time" class="form-control @error('end_time') is-invalid @enderror" name="end_time" value="{{ $schedule->end_time }}" required>
 
                             @error('end_time')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="keterangan" class="form-label">{{ __('Keterangan') }}</label>
+                            <input id="keterangan" type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" value="{{ $schedule->keterangan }}" required autofocus>
+
+                            @error('keterangan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

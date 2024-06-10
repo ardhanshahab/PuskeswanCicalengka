@@ -5,17 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="d-flex justify-content-end">
-                <a href="" class="btn btn-md click-primary mx-4" data-bs-toggle="modal" data-bs-target="#modalTambahDokter" data-placement="top" title="Tambah kategori produk">Tambah Dokter</a>
+                {{-- <a href="" class="btn btn-md click-primary mx-4" data-bs-toggle="modal" data-bs-target="#modalTambahDokter" data-placement="top" title="Tambah kategori produk">Tambah Dokter</a> --}}
             </div>
             <div class="card m-4" id="peserta">
                 <div class="card-body table-responsive">
-                    <h3 class="card-title text-center my-1">{{ __('Jadwal Puskesmas') }}</h3>
+                    <h3 class="card-title text-center my-1">{{ __('Jadwal Puskeswan Cicalengka') }}</h3>
                     @foreach($schedules as $schedule)
                         <div class="d-flex justify-content-between align-items-center p-4">
                             @if($schedule->is_holiday)
                                 <p class="m-0">{{ $schedule->day }} - Libur</p>
                             @else
-                                <p class="m-0">{{ $schedule->day }} {{ $schedule->start_time }} - {{ $schedule->end_time }}</p>
+                                <p class="m-0">{{ $schedule->day }} {{ $schedule->start_time }} - {{ $schedule->end_time }} {{ $schedule->keterangan }}</p>
                             @endif
                             <a href="{{ route('schedules.edit', $schedule->id) }}" class="btn btn-sm btn-primary">Edit</a>
                         </div>

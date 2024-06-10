@@ -12,8 +12,19 @@ class pendaftaranController extends Controller
     {
         // $hewans = Pendaftaran::all();
         // return view('pendaftaran.index', ['hewans' => $hewans]);
-        return view('pendaftaran.create');
+        return view('pendaftaran.index');
 
+    }
+
+    public function getPendaftaran()
+    {
+         $posts = Pendaftaran::with('hewan', 'dokter')->get();
+
+         return response()->json([
+            'success' => true,
+            'message' => 'List pendaftaran',
+            'data' => $posts,
+        ]);
     }
 
     public function create()

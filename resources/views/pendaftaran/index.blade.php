@@ -1,17 +1,14 @@
-@extends('layout.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="d-flex justify-content-end my-1">
-                    {{-- @if ( auth()->user()->jabatan == 'Admin' ) --}}
-                        <a href="{{ route('hewan.create') }}" class="btn btn-md btn-success mx-4" data-toggle="tooltip" data-placement="top" title="Tambah User"> Tambah Data Pasien Hewan</a>
-                    {{-- @endif --}}
                 </div>
                 <div class="card card-primary">
                   <div class="card-header" style="background-color: #E3FEF7">
-                    <h3 class="card-title">Data Pasien Hewan</h3>
+                    <h3 class="card-title text-center">Data Histori Pasien Hewan</h3>
                   </div>
                   <div class="card-body">
                     <table class="table table-striped" id="datadokter">
@@ -23,9 +20,9 @@
                                 <th scope="col">Umur</th>
                                 <th scope="col">Jenis Hewan</th>
                                 <th scope="col">Nama Pemilik</th>
-                                <th scope="col">Alamat</th>
-                                <th scope="col">Nomor HP</th>
+                                <th scope="col">Dokter yang memeriksa</th>
                                 <th scope="col">Riwayat Penyakit</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,24 +43,29 @@
             processing: '<div class="modal-backdrop show"><div class="card"><div class="card-body"><div class="spinner-border text-primary" role="status"></div></div></div></div>'
         },
         serverSide: false,
-        ajax: '{{ route('getdokter') }}',
+        ajax: '{{ route('getPendaftaran') }}',
         columns: [
             { data: 'id' },
-            { data: 'user.name' },
-            { data: 'alamat' },
-            { data: 'no_telepon' },
-            {
-                data: 'status_kerja',
-                render: function(data) {
-                    if(data == 0) {
-                        return '<span class="badge badge-success">Aktif</span>';
-                    } else if(data == 1) {
-                        return '<span class="badge badge-danger">Libur</span>';
-                    } else {
-                        return '';
-                    }
-                }
-            }
+            { data: 'nama_hewan' },
+            { data: 'hewan.jenis_kelamin' },
+            { data: 'hewan.umur' },
+            { data: 'hewan.jenis_hewan' },
+            { data: 'nama_pemilik' },
+            { data: 'nama_dokter' },
+            { data: 'riwayat_penyakit' },
+            { data: 'status' },
+            // {
+            //     data: 'status',
+            //     render: function(data) {
+            //         if(data == 0) {
+            //             return '<span class="badge badge-success">Aktif</span>';
+            //         } else if(data == 1) {
+            //             return '<span class="badge badge-danger">Libur</span>';
+            //         } else {
+            //             return '';
+            //         }
+            //     }
+            // }
         ]
     });
 });

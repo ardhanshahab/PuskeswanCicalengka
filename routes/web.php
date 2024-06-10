@@ -26,7 +26,7 @@ Route::put('masters/pasien/{pasien}', [App\Http\Controllers\pasienController::cl
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
+Route::get('/', [App\Http\Controllers\landingpageController::class, 'welcome'])->name('welcome');
 
 Route::resource('/master/dokter', \App\Http\Controllers\dokterController::class);
 Route::resource('/master/hewan', \App\Http\Controllers\hewanController::class);
@@ -38,3 +38,6 @@ Route::post('antrian/{id}/finish-examination', [\App\Http\Controllers\AntrianCon
 Route::get('/schedules', [\App\Http\Controllers\ScheduleController::class, 'index'])->name('schedules.index');
 Route::get('/schedules/{schedule}/edit', [\App\Http\Controllers\ScheduleController::class, 'edit'])->name('schedules.edit');
 Route::put('/schedules/{schedule}', [\App\Http\Controllers\ScheduleController::class, 'update'])->name('schedules.update');
+Route::get('/historipasien', [\App\Http\Controllers\pendaftaranController::class, 'index'])->name('pendaftaran.index');
+Route::get('/getPendaftaran',[App\Http\Controllers\pendaftaranController::class,'getPendaftaran'])->name('getPendaftaran');
+Route::get('/pembayaran', [\App\Http\Controllers\landingpageController::class, 'pembayaran'])->name('pembayaran');

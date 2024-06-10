@@ -320,8 +320,8 @@
                     </div>
                     <ul class="sub-menu">
                       <li><a class="link_name" href="#">Laporan</a></li>
-                      <li><a href="#">Histori Pasien</a></li>
-                      <li><a href="#">Pembayaran</a></li>
+                      <li><a href="/historipasien">Histori Pasien</a></li>
+                      <li><a href="/pembayaran">Pembayaran</a></li>
                       {{-- <li><a href="#">Card Design</a></li> --}}
                     </ul>
                   </li>

@@ -30,11 +30,5 @@ class HomeController extends Controller
 
         return view('home', compact('antrians'));
     }
-    public function welcome()
-    {
-        $schedules = Schedule::all();
-        // return view('antrian.index', compact('antrians'));
 
-        return view('welcome', compact('schedules'));
-    }
 }

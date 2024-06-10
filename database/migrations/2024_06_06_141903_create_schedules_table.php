@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('day');
             $table->time('start_time');
             $table->time('end_time');
+            $table->string('keterangan');
             $table->boolean('is_holiday')->default(false);
             $table->timestamps();
         });
