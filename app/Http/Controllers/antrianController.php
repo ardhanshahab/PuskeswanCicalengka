@@ -16,6 +16,7 @@ class AntrianController extends Controller
     {
         Carbon::setLocale('id');
     }
+
     public function index()
     {
         $antrians = Antrian::orderBy('nomor_antrian')->get();
@@ -30,8 +31,8 @@ class AntrianController extends Controller
     public function store(Request $request)
     {
         $pasien = Hewan::where('nama_hewan', $request->nama_hewan)
-                    ->where('nama_pemilik', $request->nama_pemilik)
-                    ->first();
+            ->where('nama_pemilik', $request->nama_pemilik)
+            ->first();
 
         if (!$pasien) {
             Hewan::create([
@@ -67,7 +68,7 @@ class AntrianController extends Controller
         $antrian->nama_hewan = $request->nama_hewan;
         $antrian->nomor_antrian = $nomorAntrian;
         $antrian->waktu_datang = Carbon::now()->locale('id');
-        $antrian->pendaftaran_id = $pendaftaran->id;  // Tambahkan ini
+        $antrian->pendaftaran_id = $pendaftaran->id;
         $antrian->save();
         $antrian->nama_pemilik = $request->nama_pemilik;
         $antrian->perkiraan_pemeriksaan = Carbon::now()->addMinutes(30)->locale('id');
@@ -78,7 +79,7 @@ class AntrianController extends Controller
         $perkiraan_pemeriksaan_formatted = Carbon::parse($antrian->perkiraan_pemeriksaan)->translatedFormat('l, d F Y H:i');
 
         // Generate PDF antrian
-        $pdf = Pdf::loadView('antrian.pdf', ['antrian' => $antrian, 'waktu_datang' => $antrian->waktu_datang_formatted, 'perkiraan_pemeriksaan' => $antrian->perkiraan_pemeriksaan_formatted]);
+        $pdf = Pdf::loadView('antrian.pdf', ['antrian' => $antrian, 'waktu_datang' => $waktu_datang_formatted, 'perkiraan_pemeriksaan' => $perkiraan_pemeriksaan_formatted]);
 
         // Return the generated PDF for download
         return $pdf->stream('antrian.pdf');
@@ -93,19 +94,16 @@ class AntrianController extends Controller
     public function startExamination($id)
     {
         $antrian = Antrian::with('pendaftaran')->findOrFail($id);
-        // return $antrian;
-        $antrian->waktu_periksa = Carbon::now();
+        $antrian->waktu_periksa = Carbon::now()->locale('id');
         $antrian->save();
 
         // Update the status of the related Pendaftaran record
-        $pendaftaran = Pendaftaran::where('id', $antrian->pendaftaran_id)
-        ->first();
-        // return $pendaftaran;
+        $pendaftaran = Pendaftaran::where('id', $antrian->pendaftaran_id)->first();
 
         if ($pendaftaran) {
-        $pendaftaran->status = 'Sedang dalam Pemeriksaan';
-        $antrian->tanggal_pemeriksaan = Carbon::now();
-        $pendaftaran->save();
+            $pendaftaran->status = 'Sedang dalam Pemeriksaan';
+            $pendaftaran->tanggal_pemeriksaan = Carbon::now()->locale('id');
+            $pendaftaran->save();
         }
 
         return redirect()->route('home');
@@ -114,18 +112,15 @@ class AntrianController extends Controller
     public function finishExamination($id)
     {
         $antrian = Antrian::with('pendaftaran')->findOrFail($id);
-        // return $antrian;
-        $antrian->waktu_selesai = Carbon::now();
+        $antrian->waktu_selesai = Carbon::now()->locale('id');
         $antrian->save();
 
         // Update the status of the related Pendaftaran record
-        $pendaftaran = Pendaftaran::where('id', $antrian->pendaftaran_id)
-        ->first();
-        // return $pendaftaran;
+        $pendaftaran = Pendaftaran::where('id', $antrian->pendaftaran_id)->first();
 
         if ($pendaftaran) {
-        $pendaftaran->status = 'Pembayaran';
-        $pendaftaran->save();
+            $pendaftaran->status = 'Pembayaran';
+            $pendaftaran->save();
         }
 
         return redirect()->route('home');
@@ -135,6 +130,6 @@ class AntrianController extends Controller
     {
         $antrian = Antrian::findOrFail($id);
         $antrian->delete();
-        return redirect()->route('antrian.index');
+        return redirect()->route('home');
     }
 }

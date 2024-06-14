@@ -25,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $antrians = Antrian::orderBy('nomor_antrian')->get();
+        $antrians = Antrian::with('pendaftaran')->orderBy('nomor_antrian')->get();
+        // return $antrians;
         // return view('antrian.index', compact('antrians'));
 
         return view('home', compact('antrians'));
