@@ -305,7 +305,7 @@
                     <ul class="sub-menu">
                       <li><a class="link_name" href="#">Master</a></li>
                       <li><a href="/master/dokter">Dokter</a></li>
-                      <li><a href="/master/pasien">Pasien</a></li>
+                      <li><a href="/master/hewan">Pasien</a></li>
                       {{-- <li><a href="#">Meja</a></li> --}}
                       {{-- <li><a href="#">User</a></li> --}}
                     </ul>

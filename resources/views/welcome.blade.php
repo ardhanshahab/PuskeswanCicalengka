@@ -18,10 +18,10 @@
             <nav class="navbar navbar-expand-xl py-0">
                 <div class="d-flex w-100 justify-content-between align-items-center">
                     <div class="logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Lambang_Kabupaten_Bandung%2C_Jawa_Barat%2C_Indonesia.svg/600px-Lambang_Kabupaten_Bandung%2C_Jawa_Barat%2C_Indonesia.svg.png" alt="Logo" width="100px">
-                        <a class="navbar-brand py-0 me-0" href="#">Puskeswan Cicalengka</a>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Lambang_Kabupaten_Bandung%2C_Jawa_Barat%2C_Indonesia.svg/600px-Lambang_Kabupaten_Bandung%2C_Jawa_Barat%2C_Indonesia.svg.png" alt="Logo" width="90px" class="p-1">
+                        <a class="navbar-brand py-0 me-0 text-white" href="#">Puskeswan Cicalengka</a>
                     </div>
-                    {{-- <a class="d-inline-block d-lg-block d-xl-none d-xxl-none nav-toggler text-decoration-none" data-bs-toggle="offcanvas" href="#offcanvasExample" aria-controls="offcanvasExample">
+                    {{-- <a class="d-inli   ne-block d-lg-block d-xl-none d-xxl-none nav-toggler text-decoration-none" data-bs-toggle="offcanvas" href="#offcanvasExample" aria-controls="offcanvasExample">
                         <i class="ti ti-menu-2 text-warning"></i>
                     </a> --}}
                     <div class="d-flex ms-auto align-items-center">

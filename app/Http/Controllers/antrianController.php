@@ -61,8 +61,9 @@ class AntrianController extends Controller
             'status' => 'Proses Pemeriksaan',
             'tanggal_pendaftaran' => Carbon::now()->setTimezone('Asia/Jakarta')->locale('id'),
         ]);
-
-        $lastAntrian = Antrian::orderBy('nomor_antrian', 'desc')->first();
+        $now = Carbon::now();
+        $lastAntrian = Antrian::orderBy('nomor_antrian', 'desc')->where('created_at', $now)->get()->count();
+        // return $lastAntrian->count();
         $nomorAntrian = $lastAntrian ? $lastAntrian->nomor_antrian + 1 : 1;
         $antrian = new Antrian();
         $antrian->nama_hewan = $request->nama_hewan;

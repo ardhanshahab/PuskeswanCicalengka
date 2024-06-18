@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\antrian;
 use App\Models\Schedule;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $antrians = Antrian::with('pendaftaran')->orderBy('nomor_antrian')->get();
+        $startOfWeek = Carbon::now()->startOfWeek(); // Minggu ini dimulai dari hari Senin
+        $endOfWeek = Carbon::now()->endOfWeek(); // Minggu ini berakhir pada hari Minggu
+
+        // $orders = Order::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
+        $antrians = Antrian::with('pendaftaran')->orderBy('nomor_antrian')->whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
         // return $antrians;
         // return view('antrian.index', compact('antrians'));
 
