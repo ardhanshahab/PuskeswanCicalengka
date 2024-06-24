@@ -31,7 +31,7 @@
                             <div class="col-md-6">
                                 <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required>
                                     <option value="">Select Role</option>
-                                    {{-- <option value="admin">Admin</option> --}}
+                                    <option value="admin">Admin</option>
                                     <option value="member">Pasien</option>
                                 </select>
                                 @error('role')
