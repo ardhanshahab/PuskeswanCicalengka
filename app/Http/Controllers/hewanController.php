@@ -51,9 +51,15 @@ class hewanController extends Controller
             'no_telp' => $request->no_telp,
 
         ]);
+        $user = auth()->user();
 
-        return redirect()->route('hewan.index')
+        if($user->role == 'admin'){
+            return redirect()->route('hewan.index')
             ->with('success', 'Hewan berhasil ditambahkan');
+        }else{
+            return redirect()->route('home')
+            ->with('success', 'Hewan berhasil ditambahkan');
+        }
     }
 
     public function edit($id)
@@ -85,7 +91,14 @@ class hewanController extends Controller
     {
         Hewan::find($id)->delete();
 
-        return redirect()->route('hewan.index')
+        $user = auth()->user();
+
+        if($user->role == 'admin'){
+            return redirect()->route('hewan.index')
             ->with('success', 'Hewan berhasil dihapus');
+        }else{
+            return redirect()->route('home')
+            ->with('success', 'Hewan berhasil dihapus');
+        }
     }
 }

@@ -25,7 +25,10 @@ class AntrianController extends Controller
 
     public function create()
     {
-        return view('antrian.create');
+        $user = auth()->user();
+
+        $hewans = hewan::where('nama_pemilik', $user->name)->get();
+        return view('antrian.create', compact('hewans'));
     }
 
     public function store(Request $request)

@@ -1,125 +1,61 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-end my-2">
+                    <div class="d-flex justify-content-start my-2">
+                        <h6 class="mx-2">Silahkan klik tambah antrian utk mendaftar -></h6>
+                        <h6></h6>
                         <a href="{{ route('antrian.create') }}" class="btn btn-primary">Tambah Antrian</a>
                     </div>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Hewan</th>
-                                <th>Dokter yang memeriksa</th>
-                                <th>Waktu Datang</th>
-                                <th>Waktu Periksa</th>
-                                <th>Waktu Selesai</th>
-                                <th>Durasi Tunggu (Datang -> Periksa)</th>
-                                <th>Durasi Periksa (Periksa -> Selesai)</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $no = 1;
-                                $totalDurasiTunggu = 0;
-                                $totalDurasiPeriksa = 0;
-                                $countDurasiTunggu = 0;
-                                $countDurasiPeriksa = 0;
-                                use Carbon\Carbon;
-                            @endphp
-                            @foreach($antrians->sortBy('waktu_datang') as $antrian)
-                            <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $antrian->nama_hewan }}</td>
-                                <td>{{ $antrian->pendaftaran->nama_dokter }}</td>
-                                <td>{{ $antrian->waktu_datang }}</td>
-                                <td>{{ $antrian->waktu_periksa }}</td>
-                                <td>{{ $antrian->waktu_selesai }}</td>
-                                <td>
-                                    @if($antrian->waktu_datang && $antrian->waktu_periksa)
-                                        @php
-                                            $durasiTunggu = Carbon::parse($antrian->waktu_datang)->diffInMinutes(Carbon::parse($antrian->waktu_periksa));
-                                            $totalDurasiTunggu += $durasiTunggu;
-                                            $countDurasiTunggu++;
-                                        @endphp
-                                        {{ Carbon::parse($antrian->waktu_datang)->diffForHumans(Carbon::parse($antrian->waktu_periksa), true) }}
-                                    @else
-                                        N/A
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($antrian->waktu_periksa && $antrian->waktu_selesai)
-                                        @php
-                                            $durasiPeriksa = Carbon::parse($antrian->waktu_periksa)->diffInMinutes(Carbon::parse($antrian->waktu_selesai));
-                                            $totalDurasiPeriksa += $durasiPeriksa;
-                                            $countDurasiPeriksa++;
-                                        @endphp
-                                        {{ Carbon::parse($antrian->waktu_periksa)->diffForHumans(Carbon::parse($antrian->waktu_selesai), true) }}
-                                    @else
-                                        N/A
-                                    @endif
-                                </td>
-                                <td>
-                                    @if(!$antrian->waktu_periksa)
-                                    <form action="{{ route('antrian.startExamination', $antrian->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-primary">Mulai Periksa</button>
-                                    </form>
-                                    @elseif(!$antrian->waktu_selesai)
-                                    <form action="{{ route('antrian.finishExamination', $antrian->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-success">Selesai Periksa</button>
-                                    </form>
-                                    @endif
-                                    <form action="{{ route('antrian.destroy', $antrian->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="6">Total Durasi Tunggu</th>
-                                <td colspan="2">
-                                    {{ $totalDurasiTunggu }} menit
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="6">Total Durasi Periksa</th>
-                                <td colspan="2">
-                                    {{ $totalDurasiPeriksa }} menit
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="6">Rata-rata Durasi Tunggu</th>
-                                <td colspan="2">
-                                    @if($countDurasiTunggu > 0)
-                                        {{ round($totalDurasiTunggu / $countDurasiTunggu) }} menit
-                                    @else
-                                        N/A
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="6">Rata-rata Durasi Periksa</th>
-                                <td colspan="2">
-                                    @if($countDurasiPeriksa > 0)
-                                        {{ round($totalDurasiPeriksa / $countDurasiPeriksa) }} menit
-                                    @else
-                                        N/A
-                                    @endif
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <div class="d-flex justify-content-start my-2">
+                        <h6 class="mx-2">Silahkan klik untuk menambahkan data hewan anda -></h6>
+                        <a href="{{ route('hewan.create') }}" class="btn btn-primary">Tambah Data Hewan</a>
+                    </div>
+                    <div class="card m-4" id="peserta">
+                        <div class="card-body table-responsive">
+                            <h3 class="card-title text-center my-1">{{ __('Hewan Anda') }}</h3>
+                            <table class="table table-striped" id="pesertatable">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama Pasien</th>
+                                    <th scope="col">Jenis Kelamin</th>
+                                    <th scope="col">Umur</th>
+                                    {{-- <th scope="col">Nama Pemilik</th>
+                                    <th scope="col">Alamat</th> --}}
+                                    {{-- <th scope="col">Riwayat Penyakit</th> --}}
+                                    <th scope="col">Aksi</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($hewan as $h)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $h->nama_hewan }}</td>
+                                        @if ($h->jenis_kelamin == 'L')
+                                            <td>Jantan</td>
+                                        @else
+                                            <td>Betina</td>
+                                        @endif
+                                        <td>{{ $h->umur }} Tahun</td>
+                                        <td>
+                                            <form action="{{ route('hewan.destroy', $h->id) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -42,7 +42,7 @@
 
                             <div class="form-group my-1">
                                 <label for="nama_pemilik">Nama Pemilik</label>
-                                <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik" required>
+                                <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik" value="{{ auth()->user()->name }}" readonly required>
                             </div>
 
                             <div class="form-group my-1">

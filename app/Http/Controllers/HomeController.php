@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hewan;
 use Illuminate\Http\Request;
 use App\Models\antrian;
 use App\Models\Schedule;
@@ -26,15 +27,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $startOfWeek = Carbon::now()->startOfWeek(); // Minggu ini dimulai dari hari Senin
-        $endOfWeek = Carbon::now()->endOfWeek(); // Minggu ini berakhir pada hari Minggu
+
+        $startOfWeek = Carbon::now(); // Minggu ini dimulai dari hari Senin
+        // $endOfWeek = Carbon::now()->endOfWeek(); // Minggu ini berakhir pada hari Minggu
 
         // $orders = Order::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
-        $antrians = Antrian::with('pendaftaran')->orderBy('nomor_antrian')->whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
-        // return $antrians;
-        // return view('antrian.index', compact('antrians'));
+        $antrians = Antrian::with('pendaftaran')->orderBy('nomor_antrian')->where('created_at', $startOfWeek)->get();
+        $user = auth()->user();
 
-        return view('home', compact('antrians'));
+        $hewan = hewan::where('nama_pemilik', $user->name)->get();
+        // return $user;
+        // return view('antrian.index', compact('antrians'));
+        if($user->role == 'admin'){
+            return view('fcfs.home', compact('antrians'));
+        }else{
+            return view('home', compact('hewan'));
+        }
     }
 
 }

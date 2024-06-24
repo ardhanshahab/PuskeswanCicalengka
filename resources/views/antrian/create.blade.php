@@ -28,12 +28,23 @@
 
                         <form method="POST" action="{{ route('antrian.store') }}">
                             @csrf
+                            @if (auth()->user()->role == 'member')
+                            <div class="form-group my-1">
+                                <label for="nama_hewan">Nama Pasien</label>
+                                <select name="nama_hewan" id="nama_hewan" class="form-control">
+                                    <option selected>Pilih Hewan</option>
+                                    @foreach ($hewans as $hewan)
+                                        <option value="{{ $hewan->id }}">{{ $hewan->nama_hewan }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
+                            @else
                             <div class="form-group my-1">
                                 <label for="nama_hewan">Nama Pasien</label>
                                 <input type="text" class="form-control" id="nama_hewan" name="nama_hewan" value="{{ old('nama_hewan') }}" required>
                             </div>
-
+                            @endif
                             <div class="form-group my-1">
                                 <label for="umur">Umur Pasien</label>
                                 <input type="text" class="form-control" id="umur" name="umur" value="{{ old('umur') }}" required>
@@ -65,11 +76,17 @@
                                 <label for="riwayat_penyakit">Riwayat Penyakit</label>
                                 <input type="text" class="form-control" id="riwayat_penyakit" name="riwayat_penyakit" value="{{ old('riwayat_penyakit') }}" required>
                             </div>
-
+                            @if (auth()->user()->role == 'member')
+                            <div class="form-group my-1">
+                                <label for="nama_pemilik">Nama Pemilik</label>
+                                <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik" value="{{ auth()->user()->name }}" readonly required>
+                            </div>
+                            @else
                             <div class="form-group my-1">
                                 <label for="nama_pemilik">Nama Pemilik</label>
                                 <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik" value="{{ old('nama_pemilik') }}" required>
                             </div>
+                            @endif
 
                             <div class="form-group my-1">
                                 <label for="alamat">Alamat</label>

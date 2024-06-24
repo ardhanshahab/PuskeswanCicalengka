@@ -25,7 +25,8 @@
                         <i class="ti ti-menu-2 text-warning"></i>
                     </a> --}}
                     <div class="d-flex ms-auto align-items-center">
-                        <a class="btn btn-warning btn-hover-secondery text-capitalize" href="/login">Login Pegawai</a>
+                        <a class="btn btn-warning btn-hover-secondery text-capitalize m-2" href="/login">Login</a>
+                        <a class="btn btn-warning btn-hover-secondery text-capitalize m-2" href="/register">Register</a>
                     </div>
                 </div>
             </nav>
