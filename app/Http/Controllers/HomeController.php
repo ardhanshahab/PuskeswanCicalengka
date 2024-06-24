@@ -28,11 +28,15 @@ class HomeController extends Controller
     public function index()
     {
 
-        $startOfWeek = Carbon::now(); // Minggu ini dimulai dari hari Senin
-        // $endOfWeek = Carbon::now()->endOfWeek(); // Minggu ini berakhir pada hari Minggu
+        $today = Carbon::today();
 
-        // $orders = Order::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
-        $antrians = Antrian::with('pendaftaran')->orderBy('nomor_antrian')->where('created_at', $startOfWeek)->get();
+        // Ambil data antrian untuk hari ini saja
+        $antrians = Antrian::with('pendaftaran')
+            ->whereDate('created_at', $today)
+            ->orderBy('nomor_antrian')
+            ->get();
+
+        // return $antrians;
         $user = auth()->user();
 
         $hewan = hewan::where('nama_pemilik', $user->name)->get();
