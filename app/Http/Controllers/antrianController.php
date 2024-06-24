@@ -33,6 +33,7 @@ class AntrianController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $pasien = Hewan::where('nama_hewan', $request->nama_hewan)
             ->where('nama_pemilik', $request->nama_pemilik)
             ->first();

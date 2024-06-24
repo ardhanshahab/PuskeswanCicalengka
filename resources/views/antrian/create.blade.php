@@ -34,7 +34,7 @@
                                 <select name="nama_hewan" id="nama_hewan" class="form-control">
                                     <option selected>Pilih Hewan</option>
                                     @foreach ($hewans as $hewan)
-                                        <option value="{{ $hewan->id }}">{{ $hewan->nama_hewan }}</option>
+                                        <option value="{{ $hewan->nama_hewan }}">{{ $hewan->nama_hewan }}</option>
                                     @endforeach
                                 </select>
                             </div>
