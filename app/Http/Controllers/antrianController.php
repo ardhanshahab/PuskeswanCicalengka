@@ -31,9 +31,10 @@ class AntrianController extends Controller
         return view('antrian.create', compact('hewans'));
     }
 
+
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $pasien = Hewan::where('nama_hewan', $request->nama_hewan)
             ->where('nama_pemilik', $request->nama_pemilik)
             ->first();
@@ -65,10 +66,14 @@ class AntrianController extends Controller
             'status' => 'Proses Pemeriksaan',
             'tanggal_pendaftaran' => Carbon::now()->setTimezone('Asia/Jakarta')->locale('id'),
         ]);
-        $now = Carbon::now();
-        $lastAntrian = Antrian::orderBy('nomor_antrian', 'desc')->where('created_at', $now)->get()->count();
-        // return $lastAntrian->count();
+
+        $now = Carbon::now()->startOfDay();
+        $lastAntrian = Antrian::whereDate('created_at', $now)
+            ->orderBy('nomor_antrian', 'desc')
+            ->first();
+
         $nomorAntrian = $lastAntrian ? $lastAntrian->nomor_antrian + 1 : 1;
+
         $antrian = new Antrian();
         $antrian->nama_hewan = $request->nama_hewan;
         $antrian->nomor_antrian = $nomorAntrian;
@@ -89,6 +94,7 @@ class AntrianController extends Controller
         // Return the generated PDF for download
         return $pdf->stream('antrian.pdf');
     }
+
 
     public function show($id)
     {
