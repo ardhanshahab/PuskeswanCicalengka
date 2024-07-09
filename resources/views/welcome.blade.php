@@ -59,7 +59,7 @@
 
                         {{-- <a href="{{ route('schedules.edit', $schedule->id) }}">Edit</a> --}}
                         @endforeach
-                        <a href="/antrian/create" class="btn btn-warning btn-hover-secondery"><span class="d-inline-block me-2"><i class="ti ti-playstation-triangle"></i></span> Daftar Pemeriksaan</a>
+                        {{-- <a href="/antrian/create" class="btn btn-warning btn-hover-secondery"><span class="d-inline-block me-2"><i class="ti ti-playstation-triangle"></i></span> Daftar Pemeriksaan</a> --}}
                     </div>
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
