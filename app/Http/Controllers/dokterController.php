@@ -103,6 +103,7 @@ class dokterController extends Controller
             'nip'     => 'required|min:1',
             'jenis_kelamin'     => 'required|min:1',
             'alamat'     => 'required|min:1',
+            'status_kerja'     => 'nullable',
         ]);
 
         $post = dokter::findOrFail($id);
@@ -112,6 +113,7 @@ class dokterController extends Controller
                 'nip'     => $request->nip,
                 'jenis_kelamin'     => $request->jenis_kelamin,
                 'alamat'     => $request->alamat,
+                'status_kerja'     => $request->status_kerja,
             ]);
 
             return response()->json([

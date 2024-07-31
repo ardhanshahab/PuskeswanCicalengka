@@ -18,6 +18,7 @@
                             <th scope="col">NIP</th>
                             <th scope="col">Jenis Kelamin</th>
                             <th scope="col">Alamat</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Aksi</th>
                           </tr>
                         </thead>
@@ -119,6 +120,13 @@
                             <label for="alamat">Alamat</label>
                             <input type="text" class="form-control" id="alamat_edit" name="alamat" required>
                         </div>
+                        <div class="form-group">
+                            <label for="status_kerja">Status Kerja</label>
+                            <select class="form-control" id="status_kerja_edit" name="status_kerja" required>
+                                <option value="aktif">Onsite</option>
+                                <option value="tidak aktif">Libur</option>
+                            </select>
+                        </div>
                         <button type="button" class="btn btn-primary" onclick="updateKategori()">Simpan</button>
                     </form>
                 </div>
@@ -189,6 +197,7 @@
         var nip = $('#nip_edit').val(); // Sesuaikan dengan id input NIP pada form edit
         var jenis_kelamin = $('#jenis_kelamin_edit').val(); // Sesuaikan dengan id input Jenis Kelamin pada form edit
         var alamat = $('#alamat_edit').val(); // Sesuaikan dengan id input Alamat pada form edit
+        var status_kerja = $('#status_kerja_edit').val(); // Sesuaikan dengan id input Alamat pada form edit
 
         $.ajax({
             url: "{{ route('dokters.update', ':id') }}".replace(':id', id),
@@ -198,7 +207,8 @@
                 nama_dokter: nama_dokter,
                 nip: nip,
                 jenis_kelamin: jenis_kelamin,
-                alamat: alamat
+                alamat: alamat,
+                status_kerja: status_kerja,
             },
             success: function(response) {
                 console.log(response);
@@ -212,11 +222,12 @@
     }
 
 
-    function openEditModal(id, nama_dokter, nip, jenis_kelamin, alamat) {
+    function openEditModal(id, nama_dokter, nip, jenis_kelamin, alamat, status_kerja) {
         $('#nama_dokter_edit').val(nama_dokter);
         $('#nip_edit').val(nip);
         $('#jenis_kelamin_edit').val(jenis_kelamin);
         $('#alamat_edit').val(alamat);
+        $('#status_kerja_edit').val(status_kerja);
         $('#id_kategori_produk').val(id);
         // Mengubah atribut action pada form untuk menyimpan perubahan pada kategori dengan id tertentu
         $('#formEditKategori').attr('action', '/dokter/' + id);
@@ -246,13 +257,19 @@ $(document).ready(function(){
             },
             {"data": "alamat"},
             {
+                "data": "status_kerja",
+                "render": function (data, type, row) {
+                    return data === 'aktif' ? 'Onsite' : 'Libur';
+                }
+            },
+            {
                 "data": null,
                 "render": function(data, type, row) {
                     var actions = ''
                     actions += '<div class="dropdown">';
                     actions += '<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>';
                     actions += '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
-                    actions += '<a class="dropdown-item" href="#" onclick="openEditModal(' + row.id + ', \'' + row.nama_dokter + '\', \'' + row.nip + '\', \'' + row.jenis_kelamin + '\', \'' + row.alamat + '\')">Edit</a>';
+                    actions += '<a class="dropdown-item" href="#" onclick="openEditModal(' + row.id + ', \'' + row.nama_dokter + '\', \'' + row.nip + '\', \'' + row.jenis_kelamin + '\', \'' + row.alamat + '\', \'' + row.status_kerja + '\',)">Edit</a>';
                     actions += '<form onsubmit="return confirm(\'Apakah Anda Yakin ?\');" action="/dokter/' + row.id + '" method="POST">';
                     actions += '<input type="hidden" name="_method" value="DELETE">';
                     actions += '<input type="hidden" name="_token" value="' + '{{ csrf_token() }}' + '">';
