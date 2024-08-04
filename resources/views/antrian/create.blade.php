@@ -54,8 +54,8 @@
                                 <label for="jenis_kelamin">Jenis Kelamin Hewan</label>
                                 <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
                                     <option selected>Pilih Jenis Kelamin</option>
-                                    <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                                    <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
+                                    <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Jantan</option>
+                                    <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Betina</option>
                                 </select>
                             </div>
 

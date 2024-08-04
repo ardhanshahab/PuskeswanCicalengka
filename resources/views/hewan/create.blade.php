@@ -19,8 +19,8 @@
                                 <label for="jenis_kelamin">Jenis Kelamin Hewan</label>
                                 <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
                                     <option selected>Pilih Jenis Kelamin</option>
-                                    <option value="L">Laki-laki</option>
-                                    <option value="P">Perempuan</option>
+                                    <option value="L">Jantan</option>
+                                    <option value="P">Betina</option>
                                 </select>
                             </div>
 

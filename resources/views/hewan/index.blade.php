@@ -256,7 +256,7 @@ $(document).ready(function(){
             {
                 "data": "jenis_kelamin",
                 "render": function(data, type, row) {
-                    return data === 'L' ? 'Laki-laki' : 'Perempuan';
+                    return data === 'L' ? 'Jantan' : 'Betina';
                 }
             },
             {
@@ -271,12 +271,12 @@ $(document).ready(function(){
             {
                 "data": null,
                 "render": function(data, type, row) {
-                    var actions = ''
+                    var actions = '';
                     actions += '<div class="dropdown">';
                     actions += '<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>';
                     actions += '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
                     actions += '<a class="dropdown-item" href="#" onclick="openEditModal(' + row.id + ', \'' + row.nama_pasien + '\', \'' + row.umur + '\', \'' + row.jenis_kelamin + '\', \'' + row.nama_pemilik + '\', \'' + row.riwayat_penyakit + '\', \'' + row.alamat + '\')">Edit</a>';
-                    actions += '<form onsubmit="return confirm(\'Apakah Anda Yakin ?\');" action="/dokter/' + row.id + '" method="POST">';
+                    actions += '<form onsubmit="return confirm(\'Apakah Anda Yakin ?\');" action="/master/hewan/' + row.id + '" method="POST" style="display:inline;">';
                     actions += '<input type="hidden" name="_method" value="DELETE">';
                     actions += '<input type="hidden" name="_token" value="' + '{{ csrf_token() }}' + '">';
                     actions += '<button type="submit" class="dropdown-item">Hapus</button>';
@@ -286,6 +286,7 @@ $(document).ready(function(){
                     return actions;
                 }
             }
+
 
         ],
     });
